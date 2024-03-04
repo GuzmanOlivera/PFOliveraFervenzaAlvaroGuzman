@@ -1,3 +1,4 @@
+
 /****************************************/
 /* Resumen de listas de tareas (global) */
 /****************************************/
@@ -152,6 +153,26 @@ class Tarea {
     }
 }
 
+function guardarJSONEnLocalStorage() {
+    fetch('../data/data.json')
+        .then(respuesta => {
+            if (!respuesta.ok) {
+                throw new Error('Error al acceder al archivo JSON');
+            }
+            return respuesta.json();
+        })
+        .then(datos => {
+            datos.forEach(lista => {
+                localStorage.setItem(lista.nombreLista, JSON.stringify(lista.tareas));
+            });
+            actualizarResumenListas();
+            console.log('Datos guardados en localStorage correctamente.');
+        })
+        .catch(error => {
+            console.error('Hubo un problema al recuperar los datos:', error);
+        });
+}
+
 // Funcion para cargar los datos de las listas de tareas desde el localstorage
 function cargarListasDesdeLocalStorage() {
     const nombresListas = Object.keys(localStorage);
@@ -172,6 +193,7 @@ function cargarListasDesdeLocalStorage() {
 }
 
 // Obtener las listas de tareas almacenadas en localStorage
+guardarJSONEnLocalStorage();
 const listas = cargarListasDesdeLocalStorage() || [];
 
 /* Se usan dos APIs: la principal devuelve una frase celebre en ingles y la secundaria, si esta disponible, lo traduce al espanol  */
@@ -259,7 +281,6 @@ async function traducirTexto(texto, idiomaOrigen, idiomaDestino) {
 
 /* Evento DOM al cargar la pagina */
 document.addEventListener('DOMContentLoaded', function () {
-
     const formAgregarLista = document.getElementById('formAgregarLista');
     const nombreListaInput = document.getElementById('nombreLista');
     const resumenListas = document.getElementById('resumenListas');

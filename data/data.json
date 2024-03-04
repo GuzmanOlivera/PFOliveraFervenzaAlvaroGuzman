@@ -1,0 +1,28 @@
+[
+    {
+        "nombreLista": "Tareas personales",
+        "tareas": [
+            {
+                "nombre": "Hacer ejercicio",
+                "tiempo": 1
+            },
+            {
+                "nombre": "Ir al supermercado",
+                 "tiempo": 0.5
+            }
+        ]
+    },
+    {
+        "nombreLista": "Tareas laborales",
+        "tareas": [
+            {
+                "nombre": "Enviar informe",
+                "tiempo": 2
+            },
+            {
+                "nombre": "Reunión de equipo",
+                "tiempo": 1.5
+            }
+        ]
+    }
+]
