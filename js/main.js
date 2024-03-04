@@ -3,6 +3,8 @@
 /* Resumen de listas de tareas (global) */
 /****************************************/
 
+let primeraCarga = false;
+
 function actualizarResumenListas() {
     resumenListas.innerHTML = '';
 
@@ -167,6 +169,7 @@ function guardarJSONEnLocalStorage() {
             });
             actualizarResumenListas();
             console.log('Datos guardados en localStorage correctamente.');
+            primeraCarga = true;
         })
         .catch(error => {
             console.error('Hubo un problema al recuperar los datos:', error);
@@ -192,8 +195,11 @@ function cargarListasDesdeLocalStorage() {
     return listasCargadas;
 }
 
-// Obtener las listas de tareas almacenadas en localStorage
-guardarJSONEnLocalStorage();
+// Cargar las listas de tareas almacenadas de forma personalizada, solo una vez, desde archivo JSON hacia localstorage
+if (primeraCarga) {
+    guardarJSONEnLocalStorage();
+}
+// Cargar listas desde localstorage
 const listas = cargarListasDesdeLocalStorage() || [];
 
 /* Se usan dos APIs: la principal devuelve una frase celebre en ingles y la secundaria, si esta disponible, lo traduce al espanol  */
