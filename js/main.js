@@ -3,6 +3,7 @@ let primeraCarga = false;
 /********************************/
 /* Resumen de listas de tareas  */
 /********************************/
+
 async function actualizarResumenListas() {
 
     // Esperar a que la variable listas este definida
