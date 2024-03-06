@@ -7,13 +7,13 @@ let primeraCarga = false;
 
 async function actualizarResumenListas() {
 
-alert("Entro");
-console.log(listas);
+    await cargarListas();
     // Esperar a que la variable listas este definida
     while (typeof listas === 'undefined') {
         await new Promise(resolve => setTimeout(resolve, 100)); // Esperar 100 milisegundos antes de verificar nuevamente
     }
 
+    console.log(listas);
     resumenListas.innerHTML = '';
 
     if (listas.length === 0) {
@@ -214,9 +214,6 @@ async function cargarListas() {
     listas = cargarListasDesdeLocalStorage() || [];
 }
 
-// Llamar a la función para cargar las listas
-//cargarListas(); //FIXME
-
 /* Se usan dos APIs: la principal devuelve una frase celebre en ingles y la secundaria, si esta disponible, lo traduce al espanol  */
 /* Se utiliza sincronia: async/await */
 /* Se utiliza libreria sweetalert2 para mostrar de forma embellecida la frase celebre de la API principal */
@@ -249,7 +246,8 @@ function obtenerDatosDeAPI() {
     });
 }
 
-/* La limitacion del uso de la API de google es que requiere ingresar una tarjeta de credito para generar la API Key */
+/* Traducir frase del dia */
+/* Se requiere ingresar un api key value */
 /* Se encontro alternativa en https://api.apilayer.com/language_translation/translate con usos limitados */
 async function traducirTexto(texto, idiomaOrigen, idiomaDestino) {
     var myHeaders = new Headers();
@@ -296,8 +294,8 @@ async function traducirTexto(texto, idiomaOrigen, idiomaDestino) {
             icon: 'info',
             confirmButtonText: 'OK'
         });
-        cargarListas();
-        actualizarResumenListas();
+        await cargarListas();
+        await actualizarResumenListas();
     } catch (error) {
         console.error('Error al obtener la cita del día:', error);
     }
@@ -306,7 +304,6 @@ async function traducirTexto(texto, idiomaOrigen, idiomaDestino) {
 /* Evento DOM al cargar la pagina */
 document.addEventListener('DOMContentLoaded', function () {
     async function init() {
-     //   actualizarResumenListas();
 
         const formAgregarLista = document.getElementById('formAgregarLista');
         const nombreListaInput = document.getElementById('nombreLista');
@@ -331,16 +328,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         mostrarReloj();
         await cargarListas();
-
-        // Esperar a que las listas estén cargadas antes de continuar
-        await new Promise(resolve => {
-            const interval = setInterval(() => {
-                if (listas) {
-                    clearInterval(interval);
-                    resolve();
-                }
-            }, 100);
-        });
 
         if (listas.length === 0) {
             // Mostrar el mensaje inicial
@@ -480,7 +467,6 @@ document.addEventListener('DOMContentLoaded', function () {
             formularioEliminarLista.style.display = 'block';
             actualizarListasEliminar();
         }
-
 
         function actualizarListasEliminar() {
             listaTareasEliminar.innerHTML = '';
