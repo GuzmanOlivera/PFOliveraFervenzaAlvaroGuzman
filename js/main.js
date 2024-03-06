@@ -1,15 +1,13 @@
-
-/****************************************/
-/* Resumen de listas de tareas (global) */
-/****************************************/
-
 let primeraCarga = false;
 
+/********************************/
+/* Resumen de listas de tareas  */
+/********************************/
 async function actualizarResumenListas() {
 
     // Esperar a que la variable listas este definida
     while (typeof listas === 'undefined') {
-        await new Promise(resolve => setTimeout(resolve, 100)); // Esperar 100 milisegundos antes de verificar nuevamente
+        await new Promise(resolve => setTimeout(resolve, 100)); 
     }
 
     console.log(listas);
