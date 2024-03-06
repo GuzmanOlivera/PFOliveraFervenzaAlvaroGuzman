@@ -7,7 +7,6 @@ let primeraCarga = false;
 
 async function actualizarResumenListas() {
 
-    await cargarListas();
     // Esperar a que la variable listas este definida
     while (typeof listas === 'undefined') {
         await new Promise(resolve => setTimeout(resolve, 100)); // Esperar 100 milisegundos antes de verificar nuevamente
