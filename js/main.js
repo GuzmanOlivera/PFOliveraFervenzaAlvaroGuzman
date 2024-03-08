@@ -161,7 +161,7 @@ class Tarea {
         this.tiempo = tiempo;
     }
 }
-
+ 
 async function guardarJSONEnLocalStorage() {
     fetch('/data/data.json')
         .then(respuesta => {
