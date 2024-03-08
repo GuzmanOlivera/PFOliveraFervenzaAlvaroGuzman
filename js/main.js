@@ -163,7 +163,7 @@ class Tarea {
 }
 
 async function guardarJSONEnLocalStorage() {
-    fetch('../data/data.json')
+    fetch('/data/data.json')
         .then(respuesta => {
             if (!respuesta.ok) {
                 throw new Error('Error al acceder al archivo JSON');
