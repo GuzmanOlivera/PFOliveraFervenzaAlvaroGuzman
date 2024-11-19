@@ -62,6 +62,7 @@ Los tests están ubicados en el repositorio de GitHub dentro del archivo:
 #### 1. Clona el repositorio:
 
 `git clone https://github.com/GuzmanOlivera/PFOliveraFervenzaAlvaroGuzman.git`
+
 `cd PFOliveraFervenzaAlvaroGuzman`
 
 #### 2. Instala las dependencias necesarias:
