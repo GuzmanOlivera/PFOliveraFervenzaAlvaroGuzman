@@ -1,0 +1,84 @@
+paths:
+  /api/adoptions:
+    get:
+      summary: Recuperar todas las adopciones registradas
+      tags:
+        - Adoptions
+      responses:
+        '200':
+          description: Operación exitosa - Lista de adopciones obtenida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Adoption'
+        '500':
+          description: Error inesperado del servidor
+  /api/adoptions/{aid}:
+    get:
+      summary: Recuperar información de una adopción por ID
+      tags:
+        - Adoptions
+      parameters:
+      - name: aid
+        in: path
+        required: true
+        description: Identificador único de la adopción
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operación exitosa - Adopción encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Adoption'
+        '404':
+          description: Adopción no encontrada
+        '500':
+          description: Error inesperado del servidor
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Registrar una nueva adopción
+      tags:
+        - Adoptions
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Identificador único del usuario que adopta
+        schema:
+          type: string
+      - name: pid
+        in: path
+        required: true
+        description: Identificador único de la mascota que se adopta
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Adopción registrada exitosamente
+        '404':
+          description: Usuario o mascota no encontrados
+        '500':
+          description: Error inesperado del servidor
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Identificador único de la adopción
+        owner:
+          type: string
+          description: Identificador del usuario que adopta
+        pet:
+          type: string
+          description: Identificador de la mascota adoptada
+      example:
+        _id: "64d2fabc5678abcd9012ef90"
+        owner: "63c4babc1234abcd5678ef90"
+        pet: "64c4babc5678abcd9012ef34"
