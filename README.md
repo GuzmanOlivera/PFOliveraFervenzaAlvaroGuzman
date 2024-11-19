@@ -62,6 +62,7 @@ Los tests están ubicados en el repositorio de GitHub dentro del archivo:
 #### 1. Clona el repositorio:
 
 `git clone https://github.com/GuzmanOlivera/PFOliveraFervenzaAlvaroGuzman.git
+
 cd adoptme`
 
 #### 2. Instala las dependencias necesarias:
@@ -70,7 +71,7 @@ cd adoptme`
 
 #### 3. Configura la variable de entorno `MONGO_URI` en el archivo .env que deberás crear en la raíz del proyecto. Ejemplo de valor:
 
-MONGO_URI="mongodb+srv://<user>:<password>@<cluster>.mongodb.net/adoptme?retryWrites=true&w=majority&appName=Cluster0"
+`MONGO_URI="mongodb+srv://<user>:<password>@<cluster>.mongodb.net/adoptme?retryWrites=true&w=majority&appName=Cluster0"`
 
 #### 4. Ejecuta los tests:
 
